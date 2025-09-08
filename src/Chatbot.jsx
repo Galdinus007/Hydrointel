@@ -150,19 +150,28 @@ export default function Chatbot() {
         </div>
 
         <div className="input-area">
-          <div className="input-wrapper">
-            <input
-              ref={inputRef}
-              type="text"
-              className="message-input"
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              placeholder="Type a message about groundwater levels..."
-              onKeyDown={e => e.key === "Enter" && handleSend()}
-            />
-            <button className="send-btn" onClick={handleSend} disabled={!input.trim()}>Send</button>
-          </div>
-        </div>
+  <div className="input-wrapper">
+    {recognition && (
+      <button 
+        className={`voice-btn-input ${isListening ? "listening" : ""}`} 
+        onClick={toggleVoiceRecognition}
+      >
+        🎤
+      </button>
+    )}
+    <input
+      ref={inputRef}
+      type="text"
+      className="message-input"
+      value={input}
+      onChange={e => setInput(e.target.value)}
+      placeholder="Type a message about groundwater levels..."
+      onKeyDown={e => e.key === "Enter" && handleSend()}
+    />
+    <button className="send-btn" onClick={handleSend} disabled={!input.trim()}>Send</button>
+  </div>
+</div>
+
 
         {isListening && (
           <div className="listening-indicator">
